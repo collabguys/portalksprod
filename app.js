@@ -1,29 +1,16 @@
-const express=require('express');
-const app=express();
+const express =require('express');
+const app     =express();
+const PORT    =process.env.PORT || 5000
 
-app.use(express.static("public"));
-app.set("view engine","ejs");
+var userList=[
+    "selam"
+];
 
-app.get("/",function(req,res){
-    res.render("home.ejs")
-});
-
-app.get("/test/:herhangibirsey/yorum/:bisey",function(req,res){
-    res.send("home")
-})
-app.get("/test",function(req,res){
-    res.send("bu br test denemesidir .ejs");
-});
-
-app.get("/test/:bisey",function(req,res){
-     var testParameter=req.params.bisey
-    res.render("test", {testParameter});
+app.get('/',(req,res)=>{
+    return res.status(200).send(userList);
 })
 
-app.get("*",function(req,res){
-    res.send("sayfa bulunamadı");
-});
-const server=app.listen(443,function(){
-    console.log("sunucu su anda port numarasında calısıyor: %d",
-    server.address().port);
+
+const server=app.listen(PORT,()=>{
+    console.log(`Listenin on ${PORT}.port`)
 });
