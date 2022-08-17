@@ -1,14 +1,29 @@
-var http = require("http");
+const express=require('express');
+const app=express();
 
-http.createServer(function (request, response) {
-   // Send the HTTP header 
-   // HTTP Status: 200 : OK
-   // Content Type: text/plain
-   response.writeHead(200, {'Content-Type': 'text/plain'});
-   
-   // Send the response body as "Hello World"
-   response.end('Hello World\n');
-}).listen(8081);
+app.use(express.static("public"));
+app.set("view engine","ejs");
 
-// Console will print the message
-console.log('Server running at http://127.0.0.1:8081/');
+app.get("/",function(req,res){
+    res.render("home.ejs")
+});
+
+app.get("/test/:herhangibirsey/yorum/:bisey",function(req,res){
+    res.send("home")
+})
+app.get("/test",function(req,res){
+    res.send("bu br test denemesidir .ejs");
+});
+
+app.get("/test/:bisey",function(req,res){
+     var testParameter=req.params.bisey
+    res.render("test", {testParameter});
+})
+
+app.get("*",function(req,res){
+    res.send("sayfa bulunamadı");
+});
+const server=app.listen(3000,function(){
+    console.log("sunucu su anda port numarasında calısıyor: %d",
+    server.address().port);
+});
