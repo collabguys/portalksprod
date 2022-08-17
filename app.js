@@ -23,7 +23,7 @@ app.get("/test/:bisey",function(req,res){
 app.get("*",function(req,res){
     res.send("sayfa bulunamadı");
 });
-const server=app.listen(3000,function(){
+const server=app.listen(443,function(){
     console.log("sunucu su anda port numarasında calısıyor: %d",
     server.address().port);
 });
